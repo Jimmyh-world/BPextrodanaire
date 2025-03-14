@@ -6,91 +6,119 @@ import './FeaturedMovies.css';
  * FeaturedMovies component that displays a curated collection of dystopian sci-fi films
  */
 const FeaturedMovies = () => {
-  const [featuredMovies, setFeaturedMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const [featuredMovies, setFeaturedMovies] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	const [showDetails, setShowDetails] = useState(false);
 
-  // List of IMDb IDs for notable dystopian sci-fi films
-  const dystopianSciFiFilms = [
-    'tt0133093', // The Matrix
-    'tt0816692', // Interstellar
-    'tt0470752', // Ex Machina
-    'tt1535108', // Elysium
-    'tt1392190', // Mad Max: Fury Road
-    'tt1677720', // Ready Player One
-  ];
+	// List of IMDb IDs for notable dystopian sci-fi films
+	const dystopianSciFiFilms = [
+		'tt0133093', // The Matrix
+		'tt0816692', // Interstellar
+		'tt0470752', // Ex Machina
+		'tt1535108', // Elysium
+		'tt1392190', // Mad Max: Fury Road
+		'tt1677720', // Ready Player One
+	];
 
-  useEffect(() => {
-    const fetchFeaturedMovies = async () => {
-      try {
-        setLoading(true);
+	//	const detailsBtn = (e) => {
+	//		setShowDetails(!showDetails);
+	//		console.log(showDetails);
+	//	};
 
-        // Fetch details for all dystopian sci-fi films in parallel
-        const moviesData = await Promise.all(
-          dystopianSciFiFilms.map((imdbId) => getMovieDetails(imdbId))
-        );
+	useEffect(() => {
+		const fetchFeaturedMovies = async () => {
+			try {
+				setLoading(true);
 
-        setFeaturedMovies(moviesData);
-      } catch (err) {
-        console.error('Error fetching featured movies:', err);
-        setError(
-          'Failed to load featured dystopian sci-fi films. Please try again later.'
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
+				// Fetch details for all dystopian sci-fi films in parallel
 
-    fetchFeaturedMovies();
-  }, []);
+				const moviesData = await Promise.all(
+					dystopianSciFiFilms.map((imdbId) => getMovieDetails(imdbId))
+				);
+				//let moviesData = [];
+				//for (let i = 0; i < dystopianSciFiFilms.length; i++) {
+				//	moviesData.push(
+				//		await getMovieDetails(dystopianSciFiFilms[i])
+				//	);
+				//}
 
-  return (
-    <div className='featured-movies'>
-      <h2>Featured Dystopian Sci-Fi Films</h2>
-      <p className='section-description'>
-        Explore worlds of technological control, societal collapse, and human
-        resistance in our curated collection of dystopian science fiction
-        cinema.
-      </p>
+				console.log(moviesData);
+				setFeaturedMovies(moviesData);
+			} catch (err) {
+				console.error('Error fetching featured movies:', err);
+				setError(
+					'Failed to load featured dystopian sci-fi films. Please try again later.'
+				);
+			} finally {
+				setLoading(false);
+			}
+		};
 
-      {loading && (
-        <div className='loading-container'>
-          <div className='loading-spinner'></div>
-          <p>Loading dystopian worlds...</p>
-        </div>
-      )}
+		fetchFeaturedMovies();
+	}, []);
 
-      {error && <p className='error'>{error}</p>}
+	return (
+		<div className='featured-movies'>
+			<h2>Featured Dystopian Sci-Fi Films</h2>
+			<p className='section-description'>
+				Explore worlds of technological control, societal collapse, and
+				human resistance in our curated collection of dystopian science
+				fiction cinema.
+			</p>
 
-      {!loading && !error && (
-        <div className='movies-grid'>
-          {featuredMovies.map((movie) => (
-            <div key={movie.imdbID} className='movie-card'>
-              <div className='movie-poster'>
-                {movie.Poster && movie.Poster !== 'N/A' ? (
-                  <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                ) : (
-                  <div className='no-poster'>No Poster Available</div>
-                )}
-              </div>
-              <div className='movie-info'>
-                <h3>{movie.Title}</h3>
-                <div className='movie-meta'>
-                  <span>{movie.Year}</span>
-                  <span className='rating'>{movie.imdbRating}/10</span>
-                </div>
-                <p className='movie-plot'>
-                  {movie.Plot.length > 120
-                    ? `${movie.Plot.substring(0, 120)}...`
-                    : movie.Plot}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
+			{loading && (
+				<div className='loading-container'>
+					<div className='loading-spinner'></div>
+					<p>Loading dystopian worlds...</p>
+				</div>
+			)}
+
+			{error && <p className='error'>{error}</p>}
+
+			{!showDetails && !loading && !error && (
+				<div className='movies-grid'>
+					{featuredMovies.map((movie) => (
+						<div key={movie.imdbID} className='movie-card'>
+							<div className='movie-poster'>
+								{movie.Poster && movie.Poster !== 'N/A' ? (
+									<img
+										src={movie.Poster}
+										alt={`${movie.Title} poster`}
+									/>
+								) : (
+									<div className='no-poster'>
+										No Poster Available
+									</div>
+								)}
+							</div>
+							<div className='movie-info'>
+								<h3>{movie.Title}</h3>
+								<div className='movie-meta'>
+									<span>{movie.Year}</span>
+									<span className='rating'>
+										{movie.imdbRating}/10
+									</span>
+								</div>
+								{/*<p className='movie-plot'>
+									{movie.Plot.length > 120
+										? `${movie.Plot.substring(0, 120)}...`
+										: movie.Plot}
+								</p>*/}
+								<button
+									className='view-details-btn'
+									onClick={() => {
+										!showDetails;
+									}}>
+									View Details
+								</button>
+							</div>
+						</div>
+					))}
+				</div>
+			)}
+		</div>
+	);
 };
 
 export default FeaturedMovies;
