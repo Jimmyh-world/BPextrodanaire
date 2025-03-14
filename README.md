@@ -1,8 +1,15 @@
-# Stockholm React Application (Vite)
+# Stockholm Movie Database (Vite)
 
 ## Project Overview
 
-This is a modern React application bootstrapped with Vite, designed with a focus on maintainability, scalability, and best practices. The application serves as a foundation for building robust web applications using the React framework with Vite's lightning-fast development experience.
+This is a modern React application bootstrapped with Vite, designed to search and display movie information using the OMDb API. The application demonstrates best practices in React development with a focus on maintainability, scalability, and performance using Vite's lightning-fast development experience.
+
+## Features
+
+- **Movie Search** - Search for movies by title using the OMDb API
+- **Responsive UI** - Modern, mobile-friendly interface that adapts to different screen sizes
+- **Fast Development** - Lightning-fast HMR (Hot Module Replacement) using Vite
+- **API Integration** - Clean service layer for external API communication
 
 ## Technologies Used
 
@@ -77,18 +84,21 @@ For collaboration purposes, this repository **temporarily** includes the `.env` 
 ## Project Structure
 
 ```
-vite-stockholm/
+stockholm-movie-db/
 ├── node_modules/      # Dependencies
 ├── public/            # Static files
 ├── src/               # Source code
 │   ├── assets/        # Static assets like images
 │   ├── components/    # Reusable UI components
+│   │   └── MovieSearch.jsx  # Movie search component
 │   ├── services/      # API services and data fetching
+│   │   └── movieService.js  # OMDb API integration
 │   ├── App.css        # App component styles
 │   ├── App.jsx        # Main App component
 │   ├── index.css      # Global styles
 │   └── main.jsx       # Application entry point
 ├── .env               # Environment variables (temporarily committed)
+├── .env.example       # Template for environment variables
 ├── .gitignore         # Git ignore file
 ├── eslint.config.js   # ESLint configuration
 ├── index.html         # HTML entry point
@@ -105,6 +115,14 @@ vite-stockholm/
 - **Optimized Build** - Uses Rollup for highly optimized production builds
 - **Less Configuration** - Modern defaults that require minimal configuration
 - **TypeScript Support** - Built-in TypeScript support without additional configuration
+
+## Future Enhancements
+
+- **Movie Details** - Add detailed movie information pages
+- **Favorites** - Allow users to save their favorite movies
+- **Advanced Search** - Implement filtering by year, genre, and other criteria
+- **User Authentication** - Add user accounts and personalized experiences
+- **Serverless Functions** - Move API calls to serverless functions for better security
 
 ## Development Guidelines
 

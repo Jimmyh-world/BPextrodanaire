@@ -1,23 +1,31 @@
 import { useState } from 'react';
 import './App.css';
 import MovieSearch from './components/MovieSearch';
+import FeaturedMovies from './components/FeaturedMovies';
 import './components/MovieSearch.css';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [showSearch, setShowSearch] = useState(false);
 
   return (
-    <>
+    <div className='dystopian-theme'>
       <div className='app-header'>
-        <h1>Stockholm Movie Database</h1>
-        <p className='app-subtitle'>Powered by Vite, React, and OMDb API</p>
+        <h1>Dystopian Visions</h1>
+        <p className='app-subtitle'>
+          Exploring the Dark Futures of Science Fiction Cinema
+        </p>
+        <button
+          className='toggle-search-btn'
+          onClick={() => setShowSearch(!showSearch)}>
+          {showSearch ? 'View Featured Films' : 'Search All Films'}
+        </button>
       </div>
 
-      <MovieSearch />
+      {showSearch ? <MovieSearch /> : <FeaturedMovies />}
 
       <footer className='app-footer'>
         <p>
-          Made with React (v19) and Vite (v6) |{' '}
+          Built with React & Vite | Powered by OMDb API |
           <a
             href='https://github.com/Jimmyh-world/BPextrodanaire'
             target='_blank'
@@ -26,7 +34,7 @@ function App() {
           </a>
         </p>
       </footer>
-    </>
+    </div>
   );
 }
 
