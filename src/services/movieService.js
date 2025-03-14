@@ -15,28 +15,28 @@ const BASE_URL = 'http://www.omdbapi.com';
  * @returns {Promise<Object>} - Search results
  */
 export const searchMovies = async (query, page = 1) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/?apikey=${API_KEY}&s=${encodeURIComponent(
-        query
-      )}&page=${page}`
-    );
+	try {
+		const response = await fetch(
+			`${BASE_URL}/?apikey=${API_KEY}&s=${encodeURIComponent(
+				query
+			)}&page=${page}`
+		);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
 
-    const data = await response.json();
+		const data = await response.json();
 
-    if (data.Error) {
-      throw new Error(data.Error);
-    }
+		if (data.Error) {
+			throw new Error(data.Error);
+		}
 
-    return data;
-  } catch (error) {
-    console.error('Error searching movies:', error);
-    throw error;
-  }
+		return data;
+	} catch (error) {
+		console.error('Error searching movies:', error);
+		throw error;
+	}
 };
 
 /**
@@ -45,24 +45,25 @@ export const searchMovies = async (query, page = 1) => {
  * @returns {Promise<Object>} - Detailed movie information
  */
 export const getMovieDetails = async (imdbID) => {
-  try {
-    const response = await fetch(
-      `${BASE_URL}/?apikey=${API_KEY}&i=${imdbID}&plot=full`
-    );
+	try {
+		const response = await fetch(
+			`${BASE_URL}/?apikey=${API_KEY}&i=${imdbID}&plot=full`
+		);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
 
-    const data = await response.json();
+		const data = await response.json();
+		console.log(data);
 
-    if (data.Error) {
-      throw new Error(data.Error);
-    }
+		if (data.Error) {
+			throw new Error(data.Error);
+		}
 
-    return data;
-  } catch (error) {
-    console.error('Error fetching movie details:', error);
-    throw error;
-  }
+		return data;
+	} catch (error) {
+		console.error('Error fetching movie details:', error);
+		throw error;
+	}
 };
