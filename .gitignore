@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+# TEMPORARY: .env file is committed for group collaboration
+# SECURITY WARNING: This is not a recommended practice and should be reverted before production
+# .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

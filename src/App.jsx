@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import MovieSearch from './components/MovieSearch';
+import './components/MovieSearch.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div className='app-header'>
+        <h1>Stockholm Movie Database</h1>
+        <p className='app-subtitle'>Powered by Vite, React, and OMDb API</p>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
+
+      <MovieSearch />
+
+      <footer className='app-footer'>
         <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+          Made with React (v19) and Vite (v6) |{' '}
+          <a
+            href='https://github.com/Jimmyh-world/BPextrodanaire'
+            target='_blank'
+            rel='noopener noreferrer'>
+            GitHub Repository
+          </a>
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      </footer>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
